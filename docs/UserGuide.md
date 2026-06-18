@@ -1,4 +1,4 @@
-# kafka-plurima — User Guide
+# Plurima - User Guide
 
 > A production-grade abstraction over `KafkaShareConsumer` (KIP-932) and vanilla `KafkaConsumer`. Per-key ordering with intra-partition parallelism, exponential retry, dead-letter routing, and Spring Boot integration.
 
@@ -843,6 +843,8 @@ With `maxAttempts(0)`, the first failure is classified as retriable (matches `Th
 - [KIP-932](https://cwiki.apache.org/confluence/display/KAFKA/KIP-932%3A+Queues+for+Kafka) — Queues for Kafka (share groups)
 - [KIP-1222](https://cwiki.apache.org/confluence/display/KAFKA/KIP-1222) — Acquisition lock timeout renewal
 - [KIP-1226](https://cwiki.apache.org/confluence/display/KAFKA/KIP-1226) — Share partition lag persistence
+- [Plurima benchmark results](Benchmarks.md) — direct Kafka client comparison,
+  methodology, measured throughput, and correctness scenarios
 
 ## License
 
@@ -851,8 +853,8 @@ Apache 2.0 — see [`LICENSE`](../LICENSE).
 ## Trademark Notice
 
 KAFKA is a registered trademark of The Apache Software Foundation and has been
-licensed for use by kafka-plurima. kafka-plurima has no affiliation with and is
-not endorsed by The Apache Software Foundation.
+licensed for use by Plurima. Plurima has no affiliation with and is not endorsed
+by The Apache Software Foundation.
 
 See the [Apache Kafka trademark guidance](https://kafka.apache.org/community/trademark/).
 See [`TRADEMARKS.md`](../TRADEMARKS.md) for the repository trademark notice.

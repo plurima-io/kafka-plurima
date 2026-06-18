@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to kafka-plurima are recorded here. Format follows
+All notable changes to Plurima are recorded here. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versions follow
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 

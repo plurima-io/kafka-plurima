@@ -37,6 +37,28 @@ Plurima packages those concerns into a small library surface:
 - **Operational visibility**: built-in metrics SPI plus Micrometer adapter.
 - **Spring Boot starter**: annotation-driven listeners and property binding.
 
+## Benchmark Highlights
+
+A head-to-head local benchmark compared idiomatic Kafka 4.2 client loops with
+Plurima using the same record counts and per-record handler latency.
+
+| Scenario | Vanilla Kafka | Plurima | Result |
+|---|---:|---:|---:|
+| SHARE throughput, 200 records with 100 ms handlers | 20,741 ms | 1,684 ms | **12.3x** |
+| CLASSIC per-key FIFO, 100 records across 20 keys | 10,360 ms | 1,039 ms | **10.0x** |
+| CLASSIC partition FIFO, 200 records across 4 partitions | 20,755 ms | 12,194 ms | **1.7x** |
+| Slow-handler fencing scenario | Timing-dependent | Continuous-poll completion | Correctness |
+| Permanently failing record | Partition stalled | Retried, DLT-routed, unblocked | Correctness |
+
+The largest throughput gains appear when independent records or keys can run
+concurrently. Partition-ordered processing is intentionally capped by the number
+of assigned partitions. The fencing and DLT rows measure failure-handling behavior,
+not meaningful throughput speedups.
+
+See [Benchmark Results](docs/Benchmarks.md) for methodology, raw output, limitations,
+and scenario details. These figures are from one local run and are not a general
+performance guarantee.
+
 ## Modules
 
 | Module | Maven coordinate | Purpose |
@@ -201,6 +223,8 @@ when they are present.
 
 - [User Guide](docs/UserGuide.md): full API guide, engine behavior, broker setup,
   retry/DLT, metrics, Spring Boot, shutdown, and troubleshooting.
+- [Benchmark Results](docs/Benchmarks.md): comparison with direct Kafka client
+  implementations and interpretation of the measured results.
 - [CHANGELOG](CHANGELOG.md): release notes for `0.1.0`.
 - Javadocs: public API contracts for `PlurimaConsumer`, `ConsumerEngine`,
   `OrderingMode`, `RetryPolicy`, `DltConfig`, and `PlurimaMetrics`.
